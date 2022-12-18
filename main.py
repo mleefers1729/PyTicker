@@ -1,7 +1,4 @@
-import requests 
 import ticker
-baseURL = 'https://api.polygon.io/v2/'
-
 with open('polygonKey.txt','r') as f:
     lines = f.readlines()
     myKey = lines[0]
