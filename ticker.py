@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime
+import pandas as pd
 
 def getMiliTime(t_stamp):
     try:
@@ -29,5 +30,21 @@ class polyAsset:
         result = requests.get(URL,params = {})
         return result.json()
     
+    def getTrendDirection(self,data):
+        ds = pd.DataFrame(data['results'],index=[x['t'] for x in data['results']])
+        priceLst = ds['l'].to_list()
+        v1 = priceLst[0]
+        trend = priceLst[-1] - v1
+        percChange = ((priceLst[-1]-v1)/v1) * 100
+        if percChange > 0.25:
+            return ["Trending Up",percChange]
+        elif percChange < -0.25:
+            return ["Trending Down", percChange]
+        else:
+            return ["Moving Sideways", percChange]
+
     def setName(self,name):
         self.name = name
+    
+    def setKey(self,apiKey):
+        self.apiKey = apiKey
