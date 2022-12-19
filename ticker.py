@@ -2,6 +2,7 @@ import requests
 from datetime import datetime
 import pandas as pd
 
+# Utility functions for converting timestamps
 def getMiliTime(t_stamp):
     try:
         dt_obj = datetime.strptime(t_stamp, "%Y-%m-%d %H:%M")
@@ -15,6 +16,7 @@ def getNiceTime(ms_time):
     except:
         return None
 
+# The main class that is implemented for tracking assets
 class polyAsset:
     def __init__(self,ticker,apiKey):
         self.apiKey = apiKey
