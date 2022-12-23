@@ -21,9 +21,12 @@ if sel.lower() == 'y':
 
     # Grabbing the data for the selected timeperiod and then finding the trend direction 
     # Note that we are only using the lows right now for trend direction
-    data = newTicker.getAggregatedBars(interval,multiplier,start,end)
-    trend = newTicker.getTrendDirection(data)
-    print(trend[0])
-    print(trend[1])
+    priceData = newTicker.getAggregatedBars(interval,multiplier,start,end)
+    rsiData = newTicker.getRsiData(interval,start,end)
+    priceTrend = newTicker.getTrendDirection(priceData,'price')
+    rsiTrend = newTicker.getTrendDirection(rsiData,'indicator')
+
+    print('Price is trending ' + str(priceTrend[0]))
+    print('RSI is trending ' + str(rsiTrend[0]))
 else:
     exit(1)

@@ -18,13 +18,14 @@ newTicker = ticker.polyAsset('sq',myKey)
 # start = input("Enter the start time (YYYY-MM-DD HH:mm)")
 # end = input("Enter the end time (YYYY-MM-DD HH:mm)")
 
-test = newTicker.getAggregatedBars('hour',1,'2022-12-07 12:00','2022-12-13 16:00')
+#test = newTicker.getAggregatedBars('hour',1,'2022-12-07 12:00','2022-12-13 16:00')
 # for r in test['results']:
 #     r['t'] = ticker.getNiceTime(int(r['t']))
 #     print(r)
-ds = pd.DataFrame(test['results'],index=[x['t'] for x in test['results']])
-pLst = ds['l'].to_list()
+#ds = pd.DataFrame(test['results'],index=[x['t'] for x in test['results']])
+#pLst = ds['l'].to_list()
 
+'''
 #These two blocks return the exact same result
 trend = pLst[-1] - pLst[0]
 
@@ -33,3 +34,12 @@ for i in range(1,len(pLst)):
         trend+=(pLst[i] - pLst[i-1])
     else:
         trend-=(pLst[i-1]-pLst[i])
+'''
+
+test= newTicker.rsiTrend('hour','',start='2022-12-16 05:00',end='2022-12-19 14:00')
+ds = pd.DataFrame(test['results']['values'])
+times = ds['timestamp'].to_list()
+humanTimes = [ticker.getNiceTime(int(t)) for t in times]
+ds.insert(1,'Date',humanTimes)
+ds.sort_values(by='timestamp', ascending=True, inplace=True)
+print(ds)
