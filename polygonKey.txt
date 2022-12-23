@@ -1,1 +1,1 @@
-vdt8ScAVbhjpGzLpUJpk9EtpcfCtzGUx
+Add just the text for your api key in this file. Store it somewhere secure and where you will be able to access it from inside the program.
