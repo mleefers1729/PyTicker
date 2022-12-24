@@ -1,4 +1,5 @@
 import ticker
+
 with open('C:\\Users\\mitchell leefers\\Documents\\MyFiles\\polygonkey.txt','r') as f:
     lines = f.readlines()
     myKey = lines[0]
@@ -24,10 +25,14 @@ if sel.lower() == 'y':
     # Note that we are only using the lows right now for trend direction
     priceData = newTicker.getAggregatedBars(interval,multiplier,start,end)
     rsiData = newTicker.getRsiData(interval,start,end)
+    report.append("Current Price of %s is %f" %(newTicker.name,newTicker.curPrice))
+    report.append("RSI for %s is sitting at %f" %(newTicker.name,newTicker.curRSI))
+    report.append('Price Trend Value: %f' %newTicker.priceTrend)
+    report.append('RSI Trend Value: %f' %newTicker.rsiTrend)
     report.append(newTicker.findRsiDivergences())
-
+    
+    # printing out the analysis report
     for r in report:
         print(r)
-
 else:
     exit(1)
