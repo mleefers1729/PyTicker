@@ -23,8 +23,10 @@ if sel.lower() == 'y':
 
     # Grabbing the data for the selected timeperiod and then finding the trend direction 
     # Note that we are only using the lows right now for trend direction
-    priceData = newTicker.getAggregatedBars(interval,multiplier,start,end)
+    priceData = newTicker.getAggregatedPriceData(interval,multiplier,start,end)
     rsiData = newTicker.getRsiData(interval,start,end)
+    
+    # Building the report lines with the information gathered in the above functions
     report.append("Current Price of %s is %f" %(newTicker.name,newTicker.curPrice))
     report.append("RSI for %s is sitting at %f" %(newTicker.name,newTicker.curRSI))
     report.append('Price Trend Value: %f' %newTicker.priceTrend)
