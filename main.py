@@ -1,9 +1,10 @@
 import ticker
-with open('polygonKey.txt','r') as f:
+with open('C:\\Users\\mitchell leefers\\Documents\\MyFiles\\polygonkey.txt','r') as f:
     lines = f.readlines()
     myKey = lines[0]
 f.close()
 assetDict = {}
+report = []
 
 # This portion is for the general set up. This will turn into a UI eventually.
 # Mainly just used for testing now
@@ -23,10 +24,10 @@ if sel.lower() == 'y':
     # Note that we are only using the lows right now for trend direction
     priceData = newTicker.getAggregatedBars(interval,multiplier,start,end)
     rsiData = newTicker.getRsiData(interval,start,end)
-    priceTrend = newTicker.getTrendDirection(priceData,'price')
-    rsiTrend = newTicker.getTrendDirection(rsiData,'indicator')
+    report.append(newTicker.findRsiDivergences())
 
-    print('Price is trending ' + str(priceTrend[0]))
-    print('RSI is trending ' + str(rsiTrend[0]))
+    for r in report:
+        print(r)
+
 else:
     exit(1)
